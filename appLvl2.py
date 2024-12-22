@@ -96,8 +96,9 @@ def reporteStockProductos():
     cursor = conexion()
     stock = input ("Ingrese la nueva cantidad límite especificado de producto: ")
     
-    cursor.execute(f"SELECT * FROM Productos WHERE Cantidad <= {stock} ORDER BY Cantidad DESC")
+    cursor.execute(f"SELECT * FROM Productos WHERE Cantidad <= {stock} ORDER BY Cantidad ASC")
     resultados = cursor.fetchall() # Obtener todos los registros
+    print (f"********   Producto en orden asendente   *********")
     for i in resultados: # Mostrar los resultados
         print("*"*50) 
         print (f"*  ID: {i[0]}                                   ")
