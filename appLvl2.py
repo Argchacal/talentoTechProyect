@@ -1,19 +1,26 @@
 from productos import Producto
 from conexion import *
 from creaBD_Tabla import *
+
+from colorama import Back, Fore, init
+
+print(Fore.GREEN + "Recursos Python")
+init()#inicia colorama
 def menu():
     #crea la tabla si no esta creada
     crearTabla()
-    print("*"*50) 
-    print ("*                      MENU                      *")
-    print ("*  1.Registro de productos:                      *")
-    print ("*  2.Visualización de productos:                 *")
-    print ("*  3.Actualización de productos:                 *")
-    print ("*  4.Eliminación de productos:                   *")
-    print ("*  5.Búsqueda de productos:                      *")
-    print ("*  6.Reporte de Bajo Stock:                      *")
-    print ("*  7.Salir                                       *")
-    print("*"*50)
+
+    
+    print (Fore.YELLOW + "*"*50) 
+    print (Fore.YELLOW +"*                      MENU                     *")
+    print (Fore.YELLOW + "*"+ Fore.GREEN + " 1.Registro de productos:                       "+ Fore.YELLOW +  "*")
+    print (Fore.YELLOW + "*"+ Fore.GREEN + " 2.Visualización de productos:                  "+ Fore.YELLOW +  "*")
+    print (Fore.YELLOW + "*"+ Fore.GREEN + " 3.Actualización de productos:                  "+ Fore.YELLOW +  "*")
+    print (Fore.YELLOW + "*"+ Fore.GREEN + " 4.Eliminación de productos:                    "+ Fore.YELLOW +  "*")
+    print (Fore.YELLOW + "*"+ Fore.GREEN + " 5.Búsqueda de productos:                       "+ Fore.YELLOW +  "*")
+    print (Fore.YELLOW + "*"+ Fore.GREEN + " 6.Reporte de Bajo Stock:                       "+ Fore.YELLOW +  "*")
+    print (Fore.YELLOW + "*"+ Fore.GREEN + " 7.Salir                                        "+ Fore.YELLOW +  "*")
+    print (Fore.YELLOW + "*"*50)
 
 def registrarProducto():
     nombre = input ("Ingrese nombre del producto: ")
@@ -33,14 +40,14 @@ def mostrarInventario():
     cursor.execute('SELECT * FROM Productos')
     produc = cursor.fetchall()
     for i in produc:
-        print("*"*50) 
-        print (f"*  ID: {i[0]}                                   ")
-        print (f"*  NOMBRE: {i[1]}                               ")
-        print (f"*  DESCRIPCION: {i[2]}                          ")
-        print (f"*  CANTIDAD: {i[3]}                             ")
-        print (f"*  PRECIO: {i[4]}                               ")
-        print (f"*  CATEGORIA: {i[5]}                            ")
-        print("*"*50)
+        print(Fore.YELLOW + "*"*50)
+        print (Fore.YELLOW + "*"+ Fore.GREEN + f"  ID: {i[0]}                                   ")
+        print (Fore.YELLOW + "*"+ Fore.GREEN + f"  NOMBRE: {i[1]}                               ")
+        print (Fore.YELLOW + "*"+ Fore.GREEN +f"  DESCRIPCION: {i[2]}                           ")
+        print (Fore.YELLOW + "*"+ Fore.GREEN +f"  CANTIDAD: {i[3]}                              ")
+        print (Fore.YELLOW + "*"+ Fore.GREEN +f"  PRECIO: {i[4]}                                ")
+        print (Fore.YELLOW + "*"+ Fore.GREEN +f"  CATEGORIA: {i[5]}                             ")
+        print(Fore.YELLOW + "*"*50)
     cursor.connection.close()
 
 
@@ -51,25 +58,15 @@ def buscarProducto():
     cursor.execute('SELECT * FROM Productos WHERE Id = ?', (idProducto,))
     produc = cursor.fetchall()
     for i in produc:
-        print("*"*50) 
-        print (f"*  ID: {i[0]}                                   ")
-        print (f"*  NOMBRE: {i[1]}                               ")
-        print (f"*  DESCRIPCION: {i[2]}                          ")
-        print (f"*  CANTIDAD: {i[3]}                             ")
-        print (f"*  PRECIO: {i[4]}                               ")
-        print (f"*  CATEGORIA: {i[5]}                            ")
-        print("*"*50)
+        print(Fore.YELLOW + "*"*50) 
+        print (Fore.YELLOW + "*"+ Fore.GREEN +f"  ID: {i[0]}                                   ")
+        print (Fore.YELLOW + "*"+ Fore.GREEN +f"  NOMBRE: {i[1]}                               ")
+        print (Fore.YELLOW + "*"+ Fore.GREEN +f"  DESCRIPCION: {i[2]}                          ")
+        print (Fore.YELLOW + "*"+ Fore.GREEN +f"  CANTIDAD: {i[3]}                             ")
+        print (Fore.YELLOW + "*"+ Fore.GREEN +f"  PRECIO: {i[4]}                               ")
+        print (Fore.YELLOW + "*"+ Fore.GREEN +f"  CATEGORIA: {i[5]}                            ")
+        print(Fore.YELLOW + "*"*50)
     cursor.connection.close()
-
-def actualizarProductos():
-    #El usuario puede ingrasar un id y actualizar la cantidad
-    idProducto = input ("Ingrese nombre el id a modificar: ")
-    cantNueva = input ("Ingrese la nueva cantidad del producto: ")
-    cursor = conexion()
-    cursor.execute(f"UPDATE Productos SET Cantidad = {cantNueva } WHERE Id = {idProducto}")
-    cursor.connection.commit()
-    cursor.connection.close()
-    print (f"********        Producto con Id:{idProducto} Modificado        *********")
 
 def eliminarProductos():
     #El usuario puede ingrasar un id y eliminarlo
@@ -78,7 +75,7 @@ def eliminarProductos():
     cursor.execute(f"DELETE FROM Productos WHERE Id = {idProducto}")
     cursor.connection.commit()
     cursor.connection.close()
-    print (f"********        Producto con Id:{idProducto} Eliminado        *********")
+    print (Fore.RED +f"*********  Producto con Id:{idProducto} Eliminado  **********")
 
 def actualizarProductos():
     #El usuario puede ingrasar un id y modificarlo
@@ -88,26 +85,25 @@ def actualizarProductos():
     cursor.execute(f"UPDATE Productos SET Cantidad = {cantNueva } WHERE Id = {idProducto}")
     cursor.connection.commit()
     cursor.connection.close()
-    print (f"********        Producto con Id:{idProducto} Modificado        *********")
+    print (Fore.MAGENTA + f"********  Producto con Id:{idProducto} Modificado   *********")
 
 
 def reporteStockProductos():
     #El usuario ingresa el limite de stock par mostrarlo en pantalla
     cursor = conexion()
     stock = input ("Ingrese la nueva cantidad límite especificado de producto: ")
-    
-    cursor.execute(f"SELECT * FROM Productos WHERE Cantidad <= {stock} ORDER BY Cantidad ASC")
+    cursor.execute(f"SELECT * FROM Productos WHERE Cantidad <= ? ORDER BY Cantidad DESC", (stock,))
     resultados = cursor.fetchall() # Obtener todos los registros
-    print (f"********   Producto en orden asendente   *********")
+    print (Fore.BLUE +f"********   Producto en orden decendente   *********")
     for i in resultados: # Mostrar los resultados
-        print("*"*50) 
-        print (f"*  ID: {i[0]}                                   ")
-        print (f"*  NOMBRE: {i[1]}                               ")
-        print (f"*  DESCRIPCION: {i[2]}                          ")
-        print (f"*  CANTIDAD: {i[3]}                             ")
-        print (f"*  PRECIO: {i[4]}                               ")
-        print (f"*  CATEGORIA: {i[5]}                            ")
-        print("*"*50)
+        print(Fore.YELLOW + "*"*50) 
+        print (Fore.YELLOW + "*"+ Fore.BLUE +f"  ID: {i[0]}                                   ")
+        print (Fore.YELLOW + "*"+ Fore.BLUE +f"  NOMBRE: {i[1]}                               ")
+        print (Fore.YELLOW + "*"+ Fore.BLUE +f"  DESCRIPCION: {i[2]}                          ")
+        print (Fore.YELLOW + "*"+ Fore.BLUE +f"  CANTIDAD: {i[3]}                             ")
+        print (Fore.YELLOW + "*"+ Fore.BLUE +f"  PRECIO: {i[4]}                               ")
+        print (Fore.YELLOW + "*"+ Fore.BLUE +f"  CATEGORIA: {i[5]}                            ")
+        print(Fore.YELLOW + "*"*50)
     cursor.close()
 
 

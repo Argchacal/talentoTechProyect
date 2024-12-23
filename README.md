@@ -1,6 +1,15 @@
 # talentoTechProyect
 
+Ejecucion de programa
+
+Este programa contiene contenido de la libreria colorama debe instalarla si no la tiene 
+python -m pip install colorama
+
+● Debe ejecutar el main.py.
+  Importante debe tener una carpeta llamada DataBase
+
 Funcionalidades de la aplicación
+
 ● Registro de productos: La aplicación debe permitir al usuario
 agregar nuevos productos al inventario, solicitando los
 siguientes datos: nombre, descripción, cantidad, precio y
@@ -21,20 +30,3 @@ campos nombre o categoría.
 ● Reporte de Bajo Stock: La aplicación debe generar un reporte
 de productos que tengan una cantidad igual o inferior a un
 límite especificado por el usuario.
-
-Base de datos
-● 'descripcion': Breve descripción del producto
-(texto).'cantidad': Cantidad disponible del
-producto (entero, no nulo).
-● 'precio': Precio del producto (real, no nulo).
-● 'categoria': Categoría a la que pertenece el
-producto (texto).
-● Crear una base de datos SQLite llamada
-'inventario.db' para almacenar los datos de
-los productos.
-● La tabla 'productos' debe contener las
-siguientes columnas:
-● 'id': Identificador único del producto (clave
-primaria, autoincremental).
-● 'nombre': Nombre del producto (texto, no
-nulo).
