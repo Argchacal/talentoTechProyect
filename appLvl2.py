@@ -12,7 +12,7 @@ def menu():
 
     
     print (Fore.YELLOW + "*"*50) 
-    print (Fore.YELLOW +"*                      MENU                     *")
+    print (Fore.YELLOW +"*                      MENU                      *")
     print (Fore.YELLOW + "*"+ Fore.GREEN + " 1.Registro de productos:                       "+ Fore.YELLOW +  "*")
     print (Fore.YELLOW + "*"+ Fore.GREEN + " 2.Visualización de productos:                  "+ Fore.YELLOW +  "*")
     print (Fore.YELLOW + "*"+ Fore.GREEN + " 3.Actualización de productos:                  "+ Fore.YELLOW +  "*")

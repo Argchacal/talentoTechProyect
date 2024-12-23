@@ -1,4 +1,6 @@
 from appLvl2 import *
+from colorama import Back, Fore, init
+
 
 ################# Mi proyecto ###############################
 # Al iniciar el programa, el usuario ve un menú con opciones claras:
