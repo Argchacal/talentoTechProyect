@@ -1,10 +1,9 @@
-from productos import Producto
 from conexion import *
 from creaBD_Tabla import *
 
 from colorama import Back, Fore, init
 
-print(Fore.GREEN + "Recursos Python")
+
 init()#inicia colorama
 def menu():
     #crea la tabla si no esta creada
@@ -41,8 +40,8 @@ def mostrarInventario():
     produc = cursor.fetchall()
     for i in produc:
         print(Fore.YELLOW + "*"*50)
-        print (Fore.YELLOW + "*"+ Fore.GREEN + f"  ID: {i[0]}                                   ")
-        print (Fore.YELLOW + "*"+ Fore.GREEN + f"  NOMBRE: {i[1]}                               ")
+        print (Fore.YELLOW + "*"+ Fore.GREEN +f"  ID: {i[0]}                                   ")
+        print (Fore.YELLOW + "*"+ Fore.GREEN +f"  NOMBRE: {i[1]}                               ")
         print (Fore.YELLOW + "*"+ Fore.GREEN +f"  DESCRIPCION: {i[2]}                           ")
         print (Fore.YELLOW + "*"+ Fore.GREEN +f"  CANTIDAD: {i[3]}                              ")
         print (Fore.YELLOW + "*"+ Fore.GREEN +f"  PRECIO: {i[4]}                                ")
